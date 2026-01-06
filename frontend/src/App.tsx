@@ -81,7 +81,7 @@ function App() {
               value={year}
               onChange={(e) => setYear(e.target.value)}
               placeholder="e.g., 2016"
-              min="1900"
+              min="2005"
               max="2026"
               required
             />
