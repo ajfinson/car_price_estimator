@@ -1,5 +1,6 @@
 import os
 import json
+from datetime import date
 from typing import List
 from openai import OpenAI
 from .models import VehicleInput, TcoResult, Source, VehicleInfo, Lifetime, Breakdown, Assumptions
@@ -40,8 +41,8 @@ class TcoService:
         # Get search snippets
         sources = self.get_web_search_snippets(vehicle)
         
-        # Calculate vehicle age and determine lifetime
-        current_year = 2026
+        # Calculate vehicle age and determine lifetime (use current year dynamically)
+        current_year = date.today().year
         vehicle_age = current_year - vehicle.year
         years_remaining = max(0, self.max_years - vehicle_age)
         months = years_remaining * 12
@@ -77,7 +78,7 @@ Lifetime Calculation Rules:
 
 Server Assumptions (MUST USE THESE):
 - Average km driven per year: {self.km_per_year} km
-- Fuel price per liter: ${self.fuel_price}
+- Fuel price per liter: ₪{self.fuel_price}
 - Maximum vehicle age: {self.max_years} years
 - Maximum km: {self.max_km} km
 
@@ -88,7 +89,7 @@ Calculate the total cost of ownership including:
 1. Depreciation (current value - estimated value at end of lifetime)
 2. Fuel costs (based on typical fuel consumption for this vehicle and the assumptions above)
 3. Maintenance and repairs (routine and expected repairs over the lifetime)
-4. Fees (insurance, registration, taxes - estimated averages)
+4. Fees (registration, taxes - estimated averages)
 
 YOU MUST RESPOND WITH VALID JSON ONLY. NO MARKDOWN. NO EXPLANATIONS OUTSIDE THE JSON.
 Use this exact structure:
@@ -106,7 +107,7 @@ Use this exact structure:
   "notes": [<array of 2-4 brief explanation strings>]
 }}
 
-All costs in dollars. Make reasonable estimates based on the vehicle info and research sources.
+All costs in NIS. Make reasonable estimates based on the vehicle info and research sources.
 Ensure totalCost equals the sum of all breakdown items.
 Calculate costPerMonth as totalCost / {months}.
 """

@@ -34,7 +34,7 @@ function App() {
   const formatCurrency = (value: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'ILS',
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
@@ -150,7 +150,7 @@ function App() {
                     <td>{formatCurrency(result.breakdown.maintenance)}</td>
                   </tr>
                   <tr>
-                    <td>Fees (Insurance, Registration, Taxes)</td>
+                    <td>Fees (Registration, Taxes)</td>
                     <td>{formatCurrency(result.breakdown.fees)}</td>
                   </tr>
                 </tbody>
@@ -161,7 +161,7 @@ function App() {
               <h3>Assumptions Used</h3>
               <ul>
                 <li>Average km per year: {result.assumptionsUsed.kmPerYear.toLocaleString()}</li>
-                <li>Fuel price per liter: ${result.assumptionsUsed.fuelPricePerLiter.toFixed(2)}</li>
+                <li>Fuel price per liter: ₪{result.assumptionsUsed.fuelPricePerLiter.toFixed(2)}</li>
                 <li>Maximum vehicle age: {result.assumptionsUsed.maxYears} years</li>
                 <li>Maximum km: {result.assumptionsUsed.maxKm.toLocaleString()}</li>
               </ul>
