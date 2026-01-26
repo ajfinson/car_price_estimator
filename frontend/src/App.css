@@ -146,6 +146,54 @@ header p {
   color: var(--text-color);
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.export-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.export-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.export-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.export-pdf {
+  background-color: #dc2626;
+  color: white;
+}
+
+.export-pdf:hover {
+  background-color: #b91c1c;
+}
+
+.export-excel {
+  background-color: #059669;
+  color: white;
+}
+
+.export-excel:hover {
+  background-color: #047857;
+}
+
 .confidence {
   padding: 0.5rem 1rem;
   border-radius: 20px;
@@ -296,6 +344,318 @@ footer {
   text-align: center;
   color: var(--text-muted);
   font-size: 0.9rem;
+}
+
+/* Timeline Styles */
+.timeline-section {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.timeline-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.timeline-container {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.timeline-event {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.event-marker {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.event-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  border: 3px solid var(--card-bg);
+  box-shadow: 0 0 0 2px var(--primary-color);
+  position: relative;
+  z-index: 2;
+}
+
+.timeline-event.category-depreciation .event-dot {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 2px #ef4444;
+}
+
+.timeline-event.category-fuel .event-dot {
+  background-color: #8b5cf6;
+  box-shadow: 0 0 0 2px #8b5cf6;
+}
+
+.timeline-event.category-maintenance .event-dot {
+  background-color: #f59e0b;
+  box-shadow: 0 0 0 2px #f59e0b;
+}
+
+.timeline-event.category-fees .event-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px #10b981;
+}
+
+.timeline-event.category-major_repair .event-dot {
+  background-color: #dc2626;
+  box-shadow: 0 0 0 2px #dc2626;
+}
+
+.event-line {
+  position: absolute;
+  left: 50%;
+  top: 16px;
+  width: 2px;
+  height: calc(100% + 1.5rem);
+  background-color: var(--border-color);
+  transform: translateX(-50%);
+}
+
+.event-content {
+  flex: 1;
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.event-content:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.event-item-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-color);
+}
+
+.event-trigger,
+.event-window {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.event-time {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.event-category {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  background-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.event-category.depreciation {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.event-category.fuel {
+  background-color: #ede9fe;
+  color: #5b21b6;
+}
+
+.event-category.maintenance {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.event-category.fees {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.event-category.major_repair {
+  background-color: #fee2e2;
+  color: #7f1d1d;
+}
+
+.event-cost-range {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+}
+
+.cost-range-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.cost-range-values {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cost-range-values span {
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.cost-low {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.cost-mid {
+  background-color: #d1fae5;
+  color: #065f46;
+  font-weight: 600;
+}
+
+.cost-high {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.event-meta {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.event-confidence {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.event-notes {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background: rgba(59, 130, 246, 0.05);
+  border-left: 3px solid var(--primary-color);
+  border-radius: 4px;
+}
+
+.event-notes ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.event-notes li {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  padding: 0.25rem 0;
+}
+
+.event-notes li::before {
+  content: "ℹ️ ";
+  margin-right: 0.5rem;
+}
+
+.audit-flags {
+  background-color: #fef3c7;
+  border: 1px solid #fbbf24;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+}
+
+.audit-flags ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.5rem 0 0 0;
+}
+
+.audit-flags li {
+  padding: 0.25rem 0;
+  color: #92400e;
+}
+
+.audit-flags li::before {
+  content: "• ";
+  font-weight: bold;
+}
+
+.event-category.scheduled {
+  background-color: #dbeafe;
+  color: #1e40af;
+}
+
+.timeline-event.category-scheduled .event-dot {
+  background-color: #3b82f6;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.event-category.wear {
+  background-color: #fef3c7;
+  color: #92400e;
+}
+
+.timeline-event.category-wear .event-dot {
+  background-color: #f59e0b;
+  box-shadow: 0 0 0 2px #f59e0b;
+}
+
+.event-category.failure-driven {
+  background-color: #fee2e2;
+  color: #991b1b;
+}
+
+.timeline-event.category-failure-driven .event-dot {
+  background-color: #ef4444;
+  box-shadow: 0 0 0 2px #ef4444;
+}
+
+.event-category.fees {
+  background-color: #d1fae5;
+  color: #065f46;
+}
+
+.timeline-event.category-fees .event-dot {
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px #10b981;
+}
+
+.event-description {
+  font-size: 1rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.event-cost {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary-color);
 }
 
 @media (max-width: 640px) {
