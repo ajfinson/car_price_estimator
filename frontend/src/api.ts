@@ -1,4 +1,5 @@
 import { VehicleInput, TcoResult } from './types';
+import { validateVehicleInput } from './validation';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://car-price-estimator-qva9.onrender.com';
 
@@ -20,6 +21,9 @@ export const checkHealth = async (): Promise<{ status: string; message?: string 
 };
 
 export const estimateTco = async (vehicle: VehicleInput): Promise<TcoResult> => {
+  // Validate input before sending to backend
+  validateVehicleInput(vehicle);
+
   const response = await fetch(`${API_URL}/api/tco/estimate`, {
     method: 'POST',
     headers: {
