@@ -1,16 +1,17 @@
 # 🚗 Car Lifetime TCO Calculator
 
-A simple demo application that estimates the Total Cost of Ownership (TCO) for a vehicle over its lifetime using AI-powered analysis.
+A full-stack application that provides **honest, LLM-powered estimates** of vehicle Total Cost of Ownership (TCO) with realistic uncertainty ranges and self-auditing.
 
 ## Overview
 
-This monorepo contains a full-stack application that calculates vehicle lifetime costs based on:
-- **Vehicle Information**: Make, model, and year (user input only)
-- **Lifetime Rules**: Ends at minimum of 20 years total age OR 250,000 km
-- **AI Analysis**: Uses OpenAI to generate cost estimates with reasoning
-- **Web Research**: Includes sources from web searches for transparency
+This application calculates vehicle lifetime costs with:
+- **Expert LLM Analysis**: Uses GPT-4o-mini as an automotive expert (no fake web browsing)
+- **Honest Uncertainty**: Cost ranges (low/mid/high) and confidence levels
+- **Self-Auditing**: Two-pass validation ensures data consistency
+- **Comprehensive Timeline**: Scheduled maintenance, wear items, failure-driven repairs, and fees
+- **Smart Categorization**: Different confidence levels for predictable vs. uncertain costs
 
-**Important**: All results are AI-generated estimates based on publicly available information. Actual costs may vary significantly based on individual usage patterns, location, vehicle condition, and market conditions.
+**Important**: All results are AI-generated estimates. Actual costs vary based on usage, location, and vehicle condition.
 
 ## Tech Stack
 
@@ -52,14 +53,20 @@ car_price_estimator/
 
 ### Prerequisites
 
+**Option 1: Using Docker (Recommended)**
 - Docker and Docker Compose installed
+- OpenAI API key
+
+**Option 2: Local Development**
+- Python 3.9+ installed
+- Node.js 18+ and npm installed
 - OpenAI API key
 
 ### Setup
 
-1. **Clone or create the project directory**
+#### Option 1: Docker Setup
 
-2. **Configure environment variables**
+1. **Configure environment variables**
 
 ```bash
 # Copy the example env file
@@ -69,7 +76,7 @@ cp .env.example .env
 # OPENAI_API_KEY=your-actual-key-here
 ```
 
-3. **Start the application**
+2. **Start the application**
 
 ```bash
 docker-compose up --build
@@ -80,9 +87,69 @@ This will:
 - Start the backend API on http://localhost:8000
 - Start the frontend on http://localhost:5173
 
-4. **Open your browser**
+#### Option 2: Local Development Setup
+
+1. **Install root dependencies (for concurrently)**
+
+```bash
+npm install
+```
+
+2. **Install backend and frontend dependencies**
+
+```bash
+npm run install:all
+```
+
+Or install them separately:
+```bash
+# Backend
+npm run install:backend
+
+# Frontend
+npm run install:frontend
+```
+
+3. **Configure environment variables**
+
+```bash
+# Copy the example env file
+cp .env.example .env
+
+# Edit .env and add your OpenAI API key
+```
+
+4. **Start both servers**
+
+```bash
+npm run dev
+```
+
+Or start them manually in separate terminals:
+
+Terminal 1 (Backend):
+```bash
+cd backend
+python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Terminal 2 (Frontend):
+```bash
+cd frontend
+npm run dev
+```
+
+5. **Open your browser**
 
 Navigate to http://localhost:5173
+
+## Available Scripts
+
+- `npm run install:all` - Install all dependencies (backend + frontend)
+- `npm run install:backend` - Install only backend dependencies
+- `npm run install:frontend` - Install only frontend dependencies
+- `npm run dev` - Run both backend and frontend concurrently
+- `npm start` - Alias for `npm run dev`
 
 ## API Usage
 

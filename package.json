@@ -1,0 +1,20 @@
+{
+  "name": "car-tco-calculator",
+  "version": "1.0.0",
+  "description": "Car Lifetime TCO Calculator - Full Stack Application",
+  "scripts": {
+    "install:backend": "cd backend && pip install -r requirements.txt",
+    "install:frontend": "cd frontend && npm install",
+    "install:all": "npm run install:backend && npm run install:frontend",
+    "dev:backend": "cd backend && python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\" --names \"backend,frontend\" --prefix-colors \"blue,green\"",
+    "start": "npm run dev"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "keywords": ["car", "tco", "calculator", "fastapi", "react"],
+  "author": "",
+  "license": "ISC"
+}

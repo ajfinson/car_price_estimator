@@ -1,5 +1,5 @@
-from pydantic import BaseModel
-from typing import List, Literal
+from pydantic import BaseModel, Field
+from typing import List, Literal, Optional
 
 
 class VehicleInput(BaseModel):
@@ -8,17 +8,11 @@ class VehicleInput(BaseModel):
     year: int
 
 
-class VehicleInfo(BaseModel):
-    make: str
-    model: str
-    year: int
-
-
 class Lifetime(BaseModel):
-    totalCost: float
-    costPerMonth: float
     months: int
     endReason: Literal["maxYears", "maxKm"]
+    totalCost: float
+    costPerMonth: float
 
 
 class Breakdown(BaseModel):
@@ -28,24 +22,52 @@ class Breakdown(BaseModel):
     fees: float
 
 
+class Trigger(BaseModel):
+    ageYears: Optional[float] = None
+    km: Optional[int] = None
+
+
+class Window(BaseModel):
+    kmMin: Optional[int] = None
+    kmMax: Optional[int] = None
+    ageMin: Optional[float] = None
+    ageMax: Optional[float] = None
+
+
+class CostRange(BaseModel):
+    low: float
+    mid: float
+    high: float
+
+
+class TimelineItem(BaseModel):
+    item: str
+    category: Literal["scheduled", "wear", "failure-driven", "fees"]
+    trigger: Trigger
+    window: Window
+    description: str
+    cost: CostRange
+    confidence: Literal["low", "medium", "high"]
+    notes: List[str]
+
+
+class AuditBlock(BaseModel):
+    timelineSorted: bool
+    totalsConsistent: bool
+    maintenanceMatchesTimelineMid: bool
+    flags: List[str]
+
+
+class TcoResult(BaseModel):
+    lifetime: Lifetime
+    breakdown: Breakdown
+    timeline: List[TimelineItem]
+    audit: AuditBlock
+    overallConfidence: Literal["low", "medium", "high"]
+
+
 class Assumptions(BaseModel):
     kmPerYear: int
     fuelPricePerLiter: float
     maxYears: int
     maxKm: int
-
-
-class Source(BaseModel):
-    title: str
-    url: str
-    snippet: str
-
-
-class TcoResult(BaseModel):
-    vehicle: VehicleInfo
-    lifetime: Lifetime
-    breakdown: Breakdown
-    assumptionsUsed: Assumptions
-    sourcesUsed: List[Source]
-    confidence: Literal["low", "medium", "high"]
-    notes: List[str]
