@@ -483,6 +483,7 @@ function App() {
           ⚠️ Results are AI-generated estimates using expert automotive knowledge.
           Cost ranges represent realistic uncertainty. Actual costs may vary based on usage, location, and vehicle condition.
         </p>
+       { backendStatus === 'error' && (<p>Backend service is currently unavailable. Please try again later.</p>)}
       </footer>
     </div>
   );
