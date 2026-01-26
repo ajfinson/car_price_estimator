@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { estimateTco } from './api';
+import { useState, useEffect } from 'react';
+import { estimateTco, checkHealth } from './api';
 import { TcoResult } from './types';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
@@ -13,6 +13,21 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [result, setResult] = useState<TcoResult | null>(null);
+  const [backendStatus, setBackendStatus] = useState<'checking' | 'healthy' | 'error'>('checking');
+
+  useEffect(() => {
+    // Check backend health on mount (silently in background)
+    const checkBackendHealth = async () => {
+      const health = await checkHealth();
+      if (health.status === 'healthy') {
+        setBackendStatus('healthy');
+      } else {
+        setBackendStatus('error');
+      }
+    };
+
+    checkBackendHealth();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

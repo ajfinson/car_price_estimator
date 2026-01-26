@@ -2,6 +2,23 @@ import { VehicleInput, TcoResult } from './types';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
+export const checkHealth = async (): Promise<{ status: string; message?: string }> => {
+  try {
+    const response = await fetch(`${API_URL}/health`, {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      return { status: 'error', message: 'Backend returned an error' };
+    }
+
+    const data = await response.json();
+    return { status: 'healthy', message: data.status };
+  } catch (error) {
+    return { status: 'error', message: 'Cannot connect to backend server' };
+  }
+};
+
 export const estimateTco = async (vehicle: VehicleInput): Promise<TcoResult> => {
   const response = await fetch(`${API_URL}/api/tco/estimate`, {
     method: 'POST',
