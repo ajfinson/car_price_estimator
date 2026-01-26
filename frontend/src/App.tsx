@@ -24,6 +24,7 @@ function App() {
       } else {
         setBackendStatus('error');
       }
+       console.log(backendStatus);
     };
 
     checkBackendHealth();
