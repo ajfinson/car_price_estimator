@@ -1,6 +1,6 @@
 import { VehicleInput, TcoResult } from './types';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+const API_URL = import.meta.env.VITE_API_URL || 'https://car-price-estimator-qva9.onrender.com';
 
 export const checkHealth = async (): Promise<{ status: string; message?: string }> => {
   try {
