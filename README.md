@@ -2,6 +2,10 @@
 
 A full-stack application that provides **honest, LLM-powered estimates** of vehicle Total Cost of Ownership (TCO) with realistic uncertainty ranges and self-auditing.
 
+
+https://github.com/user-attachments/assets/2a9245ba-4719-4d4f-8c87-b3cb6ce2628e
+
+
 ## Overview
 
 This application calculates vehicle lifetime costs with:
